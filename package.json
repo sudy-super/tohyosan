@@ -3,24 +3,30 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint"
+    "dev": "vite",
+    "dev:api": "wrangler pages dev dist --d1=DB --local",
+    "build": "vite build",
+    "preview": "wrangler d1 migrations apply quadratic-voting-db --local --persist-to .wrangler/state && wrangler pages dev dist --persist-to .wrangler/state",
+    "deploy": "wrangler pages deploy dist",
+    "db:migrate:local": "wrangler d1 migrations apply quadratic-voting-db --local --persist-to .wrangler/state",
+    "db:migrate:remote": "wrangler d1 migrations apply quadratic-voting-db --remote"
   },
   "dependencies": {
-    "next": "16.2.9",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "react-router-dom": "^7.18.0"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4",
+    "@cloudflare/workers-types": "^4.20260625.1",
+    "@tailwindcss/vite": "^4.3.1",
     "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.3",
     "eslint": "^9",
-    "eslint-config-next": "16.2.9",
-    "tailwindcss": "^4",
-    "typescript": "^5"
+    "tailwindcss": "^4.3.1",
+    "typescript": "^5",
+    "vite": "^8.1.0",
+    "wrangler": "^4.104.0"
   }
 }

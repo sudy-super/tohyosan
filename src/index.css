@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-foreground: #333;
+  --color-brand: #69B040;
+  --color-brand-dark: #5A9A35;
+  --color-brand-light: #e8f5e0;
+  --color-accent: #69B040;
+}
+
+body {
+  background: #fff;
+  color: #333;
+  font-family: "Plus Jakarta Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3 { text-wrap: balance; }
+p, li { text-wrap: pretty; }
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out;
+}
