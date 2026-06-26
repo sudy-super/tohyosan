@@ -13,7 +13,7 @@ export default function Home() {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [options, setOptions] = useState(["", ""]);
-  const [credits, setCredits] = useState(10);
+  const [credits, setCredits] = useState(100);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
 
