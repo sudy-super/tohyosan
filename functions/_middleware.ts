@@ -36,13 +36,12 @@ export const onRequest: PagesFunction<Env> = async (context) => {
 <html prefix="og: https://ogp.me/ns#">
 <head>
 <meta charset="utf-8"/>
-<meta property="og:title" content="${title} - 投票さん"/>
-<meta property="og:description" content="Quadratic Votingで公平に投票しよう"/>
+<meta property="og:title" content="${title} | 投票さん"/>
 <meta property="og:image" content="${ogImage}"/>
 <meta property="og:url" content="${pageUrl}"/>
 <meta property="og:type" content="website"/>
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:title" content="${title} - 投票さん"/>
+<meta name="twitter:title" content="${title} | 投票さん"/>
 <meta name="twitter:image" content="${ogImage}"/>
 </head>
 <body></body>
