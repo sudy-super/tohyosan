@@ -1,3 +1,5 @@
+import { deriveVoterId } from "../../../../lib/voter";
+
 interface Env {
   DB: D1Database;
 }
@@ -5,12 +7,7 @@ interface Env {
 export const onRequestGet: PagesFunction<Env, "id"> = async (context) => {
   const db = context.env.DB;
   const id = context.params.id as string;
-  const url = new URL(context.request.url);
-  const voterId = url.searchParams.get("voter_id");
-
-  if (!voterId) {
-    return Response.json({ voted: false });
-  }
+  const voterId = await deriveVoterId(context.request);
 
   const ballot = await db
     .prepare("SELECT id FROM ballots WHERE session_id = ? AND voter_id = ?")

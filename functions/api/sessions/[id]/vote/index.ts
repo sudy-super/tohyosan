@@ -1,3 +1,5 @@
+import { deriveVoterId } from "../../../../lib/voter";
+
 interface Env {
   DB: D1Database;
 }
@@ -5,16 +7,14 @@ interface Env {
 export const onRequestPost: PagesFunction<Env, "id"> = async (context) => {
   const db = context.env.DB;
   const id = context.params.id as string;
+  const voterId = await deriveVoterId(context.request);
+
   const body = await context.request.json<{
-    voter_id: string;
     allocations: { option_id: number; num_votes: number }[];
   }>();
 
-  const { voter_id, allocations } = body;
+  const { allocations } = body;
 
-  if (!voter_id || typeof voter_id !== "string") {
-    return Response.json({ error: "voter_id required" }, { status: 400 });
-  }
   if (!Array.isArray(allocations)) {
     return Response.json({ error: "allocations required" }, { status: 400 });
   }
@@ -30,7 +30,7 @@ export const onRequestPost: PagesFunction<Env, "id"> = async (context) => {
 
   const existing = await db
     .prepare("SELECT id FROM ballots WHERE session_id = ? AND voter_id = ?")
-    .bind(id, voter_id)
+    .bind(id, voterId)
     .first();
 
   if (existing) {
@@ -76,7 +76,7 @@ export const onRequestPost: PagesFunction<Env, "id"> = async (context) => {
   await db.batch([
     db
       .prepare("INSERT INTO ballots (id, session_id, voter_id) VALUES (?, ?, ?)")
-      .bind(ballotId, id, voter_id),
+      .bind(ballotId, id, voterId),
     ...itemStatements,
   ]);
 

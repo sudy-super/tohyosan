@@ -14,18 +14,6 @@ interface Props {
   creditsPerVoter: number;
 }
 
-const VOTER_KEY_PREFIX = "qv_voter_";
-
-function getOrCreateVoterId(sessionId: string): string {
-  const key = VOTER_KEY_PREFIX + sessionId;
-  let id = localStorage.getItem(key);
-  if (!id) {
-    id = crypto.randomUUID();
-    localStorage.setItem(key, id);
-  }
-  return id;
-}
-
 function SectionHeader({ children }: { children: React.ReactNode }) {
   return (
     <h2 className="text-sm font-bold text-foreground border-l-3 border-brand pl-2.5">
@@ -62,8 +50,7 @@ export default function VotingForm({
   const remainingCredits = creditsPerVoter - totalCreditsUsed;
 
   useEffect(() => {
-    const voterId = getOrCreateVoterId(sessionId);
-    fetch(`/api/sessions/${sessionId}/vote/check?voter_id=${voterId}`)
+    fetch(`/api/sessions/${sessionId}/vote/check`)
       .then((r) => r.json())
       .then((data) => {
         if (data.voted) setAlreadyVoted(true);
@@ -97,7 +84,6 @@ export default function VotingForm({
     setError("");
     setSubmitting(true);
 
-    const voterId = getOrCreateVoterId(sessionId);
     const allocations = options.map((o) => ({
       option_id: o.id,
       num_votes: votes[o.id] || 0,
@@ -107,7 +93,7 @@ export default function VotingForm({
       const res = await fetch(`/api/sessions/${sessionId}/vote`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ voter_id: voterId, allocations }),
+        body: JSON.stringify({ allocations }),
       });
 
       if (!res.ok) {

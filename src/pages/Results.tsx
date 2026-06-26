@@ -14,21 +14,13 @@ interface SessionResults {
   voter_count: number;
 }
 
-const VOTER_KEY_PREFIX = "qv_voter_";
-
 export default function Results() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const [results, setResults] = useState<SessionResults | null>(null);
 
   useEffect(() => {
-    const voterId = localStorage.getItem(VOTER_KEY_PREFIX + id);
-    if (!voterId) {
-      navigate(`/${id}`, { replace: true });
-      return;
-    }
-
-    fetch(`/api/sessions/${id}/vote/check?voter_id=${voterId}`)
+    fetch(`/api/sessions/${id}/vote/check`)
       .then((r) => r.json())
       .then((data) => {
         if (!data.voted) {
