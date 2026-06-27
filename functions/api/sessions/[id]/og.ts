@@ -56,7 +56,7 @@ export const onRequestGet: PagesFunction<Env, "id"> = async (context) => {
               type: "p",
               props: {
                 style: {
-                  fontSize: title.length > 20 ? "44px" : "56px",
+                  fontSize: title.length > 20 ? "56px" : "72px",
                   fontWeight: "700",
                   color: "#333",
                   margin: "0",
