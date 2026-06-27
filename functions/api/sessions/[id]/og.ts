@@ -74,7 +74,7 @@ export const onRequestGet: PagesFunction<Env, "id"> = async (context) => {
                   fontSize: "30px",
                   fontWeight: "700",
                   color: "#69B040",
-                  margin: "40px 0 0",
+                  marginTop: "auto",
                 },
                 children: "投票さん",
               },
