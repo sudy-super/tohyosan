@@ -28,7 +28,7 @@ export const onRequestGet: PagesFunction<Env, "id"> = async (context) => {
       style: {
         width: "1200px",
         height: "630px",
-        background: "#69B040",
+        background: "#3D8C28",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
