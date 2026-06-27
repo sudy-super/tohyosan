@@ -28,12 +28,12 @@ export const onRequestGet: PagesFunction<Env, "id"> = async (context) => {
       style: {
         width: "1200px",
         height: "630px",
-        background: "#3D8C28",
+        background: "#2D9F3E",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         fontFamily: "Noto Sans JP",
-        padding: "36px",
+        padding: "32px",
         boxSizing: "border-box",
       },
       children: {
@@ -43,12 +43,11 @@ export const onRequestGet: PagesFunction<Env, "id"> = async (context) => {
             width: "100%",
             height: "100%",
             background: "white",
-            borderRadius: "12px",
+            borderRadius: "10px",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            justifyContent: "center",
-            padding: "60px",
+            padding: "0 60px",
             boxSizing: "border-box",
           },
           children: [
@@ -60,6 +59,7 @@ export const onRequestGet: PagesFunction<Env, "id"> = async (context) => {
                   fontWeight: "700",
                   color: "#333",
                   margin: "0",
+                  marginTop: "160px",
                   lineHeight: "1.4",
                   textAlign: "center",
                   wordBreak: "break-word",
@@ -71,10 +71,12 @@ export const onRequestGet: PagesFunction<Env, "id"> = async (context) => {
               type: "p",
               props: {
                 style: {
-                  fontSize: "30px",
+                  fontSize: "36px",
                   fontWeight: "700",
-                  color: "#69B040",
+                  color: "#2D9F3E",
+                  margin: "0",
                   marginTop: "auto",
+                  marginBottom: "50px",
                 },
                 children: "投票さん",
               },
@@ -98,6 +100,6 @@ export const onRequestGet: PagesFunction<Env, "id"> = async (context) => {
     ],
   });
 
-  response.headers.set("Cache-Control", "public, max-age=86400");
+  response.headers.set("Cache-Control", "public, max-age=300");
   return response;
 };
