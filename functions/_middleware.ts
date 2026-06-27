@@ -27,7 +27,7 @@ export const onRequest: PagesFunction<Env> = async (context) => {
     return context.next();
   }
 
-  const ogImage = `${url.origin}/api/sessions/${sessionId}/ogp.svg`;
+  const ogImage = `${url.origin}/api/sessions/${sessionId}/og`;
   const pageUrl = `${url.origin}/${sessionId}`;
   const title = escapeHtml(session.title);
 
@@ -38,6 +38,8 @@ export const onRequest: PagesFunction<Env> = async (context) => {
 <meta charset="utf-8"/>
 <meta property="og:title" content="${title} | 投票さん"/>
 <meta property="og:image" content="${ogImage}"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
 <meta property="og:url" content="${pageUrl}"/>
 <meta property="og:type" content="website"/>
 <meta name="twitter:card" content="summary_large_image"/>
@@ -46,7 +48,12 @@ export const onRequest: PagesFunction<Env> = async (context) => {
 </head>
 <body></body>
 </html>`,
-    { headers: { "Content-Type": "text/html; charset=utf-8" } }
+    {
+      headers: {
+        "Content-Type": "text/html; charset=utf-8",
+        "Cache-Control": "public, max-age=3600",
+      },
+    }
   );
 };
 
